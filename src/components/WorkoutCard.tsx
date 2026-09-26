@@ -1,15 +1,12 @@
 "use client";
-
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Clock, Flame, Star } from "lucide-react";
 import { Workout } from "@/types/workout";
-
 interface WorkoutCardProps {
   workout: Workout;
 }
-
 export const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
   return (
     <Link
@@ -26,18 +23,18 @@ export const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
           priority={workout.id <= 3}
           unoptimized
         />
-        <div className="absolute bottom-3 left-3 flex flex-wrap gap-1.5 z-10">
-          {workout.muscleGroups.map((group, idx) => (
-            <span
-              key={idx}
-              className="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold tracking-wider uppercase bg-[#ccff00] text-black shadow-sm"
-            >
-              {group}
-            </span>
-          ))}
-        </div>
       </div>
-      <div className="p-5 flex-1 flex flex-col justify-between">
+      <div className="px-5 pt-4 flex flex-wrap gap-1.5">
+        {workout.muscleGroups.map((group, idx) => (
+          <span
+            key={idx}
+            className="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold tracking-wider uppercase bg-[#ccff00] text-black shadow-sm"
+          >
+            {group}
+          </span>
+        ))}
+      </div>
+      <div className="p-5 pt-3 flex-1 flex flex-col justify-between">
         <div>
           <h3 className="font-oswald text-lg font-bold uppercase tracking-wide text-white group-hover:text-[#ccff00] transition-colors line-clamp-1">
             {workout.name}

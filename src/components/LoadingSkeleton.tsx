@@ -1,7 +1,6 @@
 import React from "react";
-
 export const WorkoutCardSkeleton: React.FC = () => {
-  return (
+return (
     <div className="bg-[#131722] border border-[#222938] rounded-xl overflow-hidden flex flex-col animate-pulse">
       <div className="w-full h-52 bg-[#1c2230]" />
       <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
@@ -33,10 +32,8 @@ export const PlanListSkeleton: React.FC = () => {
   return (
     <div className="space-y-4">
       {Array.from({ length: 3 }).map((_, i) => (
-        <div
-          key={i}
-          className="bg-[#131722] border border-[#222938] rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 animate-pulse"
-        >
+        <div key={i}
+          className="bg-[#131722] border border-[#222938] rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 animate-pulse">
           <div className="flex items-center gap-4 w-full sm:w-auto">
           <div className="w-24 h-20 bg-[#1c2230] rounded-lg shrink-0" />
           <div className="space-y-2 flex-1">

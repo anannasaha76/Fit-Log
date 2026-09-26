@@ -1,22 +1,17 @@
 "use client";
-
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown, Check } from "lucide-react";
-
 export type SortOption = "duration" | "caloriesBurned" | "rating";
-
 interface SortDropdownProps {
   sortBy: SortOption;
   onSortChange: (option: SortOption) => void;
 }
-
 export const SortDropdown: React.FC<SortDropdownProps> = ({
   sortBy,
   onSortChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
   const options: { label: string; value: SortOption }[] = [
     { label: "Duration", value: "duration" },
     { label: "Calories", value: "caloriesBurned" },

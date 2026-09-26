@@ -24,8 +24,6 @@ body {
 .font-oswald {
   font-family: var(--font-oswald), sans-serif;
 }
-
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;

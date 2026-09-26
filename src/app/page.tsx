@@ -1,14 +1,11 @@
 "use client";
-
 import React, { useEffect, useState, useMemo } from "react";
-import Image from "next/image";
-import { ArrowDown, Search, Filter } from "lucide-react";
+import { Search } from "lucide-react";
 import { Workout } from "@/types/workout";
 import { WorkoutCard } from "@/components/WorkoutCard";
 import { LibraryGridSkeleton } from "@/components/LoadingSkeleton";
 import { SortDropdown, SortOption } from "@/components/SortDropdown";
 import { Hero } from "@/components/Hero";
-
 export default function HomePage() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -38,13 +35,7 @@ export default function HomePage() {
 
     fetchWorkouts();
   }, []);
-  const allMuscleGroups = useMemo(() => {
-    const groups = new Set<string>();
-    workouts.forEach((w) => {
-      w.muscleGroups?.forEach((g) => groups.add(g.toUpperCase()));
-    });
-    return ["ALL", ...Array.from(groups)];
-  }, [workouts]);
+
   const filteredWorkouts = useMemo(() => {
     return workouts
       .filter((workout) => {
@@ -78,8 +69,7 @@ export default function HomePage() {
       librarySection.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-  return (
+return (
     <div className="space-y-16 pb-20">
       <Hero />
       <section id="library" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
@@ -87,7 +77,7 @@ export default function HomePage() {
         <div>
         <h2 className="font-oswald text-3xl sm:text-4xl font-extrabold uppercase tracking-wide text-white">
               THE LIBRARY</h2>
-        <p className="text-gray-400 text-sm mt-1 font-medium">Twelve lifts covering every major muscle group.</p>
+        <p className="text-[#9CA3AF] text-sm mt-1 font-medium">Twelve lifts covering every major muscle group.</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             {/* Search Input */}
@@ -104,23 +94,6 @@ export default function HomePage() {
             <SortDropdown sortBy={sortBy} onSortChange={setSortBy} />
           </div>
         </div>
-        {!loading && workouts.length > 0 && (
-          <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-6 no-scrollbar">
-            <Filter className="w-3.5 h-3.5 text-gray-400 shrink-0 mr-1" />
-            {allMuscleGroups.map((group) => (
-              <button
-                key={group}
-                onClick={() => setSelectedGroup(group)}
-                className={`px-3.5 py-1 rounded-full text-xs font-bold transition-all shrink-0 uppercase tracking-wider ${selectedGroup === group
-                    ? "bg-[#ccff00] text-black shadow-md shadow-[#ccff00]/10"
-                    : "bg-[#131722] text-gray-400 hover:text-white border border-[#222938]"
-                  }`}
-              >
-                {group}
-              </button>
-            ))}
-          </div>
-        )}
         {loading && (
           <div className="space-y-4">
             <div className="flex items-center gap-3 text-sm text-gray-400 font-medium py-2">

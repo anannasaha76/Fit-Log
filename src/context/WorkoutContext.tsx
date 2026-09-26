@@ -4,9 +4,11 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { Workout, PlannedWorkout } from "@/types/workout";
 import { toast } from "sonner";
 
-interface WorkoutContextType {
+export interface WorkoutContextType {
   todayPlan: PlannedWorkout[];
+  setTodayPlan: React.Dispatch<React.SetStateAction<PlannedWorkout[]>>;
   savedWorkouts: Workout[];
+  setSavedWorkouts: React.Dispatch<React.SetStateAction<Workout[]>>;
   addToTodayPlan: (workout: Workout) => boolean;
   removeFromTodayPlan: (id: number) => void;
   toggleDoneTodayPlan: (id: number) => void;
@@ -27,22 +29,25 @@ export const WorkoutProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [savedWorkouts, setSavedWorkouts] = useState<Workout[]>([]);
   const [isHydrated, setIsHydrated] = useState(false);
   useEffect(() => {
-    try {
-      const storedPlan = localStorage.getItem("fitlog_today_plan");
-      const storedSaved = localStorage.getItem("fitlog_saved_workouts");
+    queueMicrotask(() => {
+      try {
+        const storedPlan = localStorage.getItem("fitlog_today_plan");
+        const storedSaved = localStorage.getItem("fitlog_saved_workouts");
 
-      if (storedPlan) {
-        setTodayPlan(JSON.parse(storedPlan));
+        if (storedPlan) {
+          setTodayPlan(JSON.parse(storedPlan));
+        }
+        if (storedSaved) {
+          setSavedWorkouts(JSON.parse(storedSaved));
+        }
+      } catch (e) {
+        console.error("Failed to load fitlog state from localStorage", e);
+      } finally {
+        setIsHydrated(true);
       }
-      if (storedSaved) {
-        setSavedWorkouts(JSON.parse(storedSaved));
-      }
-    } catch (e) {
-      console.error("Failed to load fitlog state from localStorage", e);
-    } finally {
-      setIsHydrated(true);
-    }
+    });
   }, []);
+
   useEffect(() => {
     if (isHydrated) {
       localStorage.setItem("fitlog_today_plan", JSON.stringify(todayPlan));
@@ -142,7 +147,9 @@ export const WorkoutProvider: React.FC<{ children: React.ReactNode }> = ({ child
     <WorkoutContext.Provider
       value={{
         todayPlan,
+        setTodayPlan,
         savedWorkouts,
+        setSavedWorkouts,
         addToTodayPlan,
         removeFromTodayPlan,
         toggleDoneTodayPlan,
@@ -158,23 +165,13 @@ export const WorkoutProvider: React.FC<{ children: React.ReactNode }> = ({ child
     </WorkoutContext.Provider>
   );
 };
-export const useWorkout = () => {
+
+export const useWorkout = (): WorkoutContextType => {
   const context = useContext(WorkoutContext);
   if (!context) {
-    return {
-      todayPlan: [],
-      savedWorkouts: [],
-      addToTodayPlan: () => false,
-      removeFromTodayPlan: () => {},
-      toggleDoneTodayPlan: () => {},
-      addToSaved: () => false,
-      removeFromSaved: () => {},
-      isWorkoutInPlan: () => false,
-      isWorkoutSaved: () => false,
-      clearPlan: () => {},
-      isHydrated: true,
-    };
+    throw new Error("useWorkout must be used within a WorkoutProvider");
   }
   return context;
 };
+
 export default useWorkout;

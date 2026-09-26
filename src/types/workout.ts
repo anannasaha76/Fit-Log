@@ -5,8 +5,8 @@ export interface Workout {
   muscleGroups: string[];
   equipment: string;
   difficulty: string;
-  duration: number; // in minutes
-  caloriesBurned: number; // in kcal
+  duration: number;
+  caloriesBurned: number;
   sets: number;
   reps: string;
   rating: number;
