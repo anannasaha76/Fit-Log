@@ -46,40 +46,37 @@ export const Navbar: React.FC = () => {
             My Plan
           </Link>
         </nav>
-        <div className="flex items-center gap-1.5 sm:gap-3">
-          {/* Plan / Saved badges — compact on small screens */}
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full transition-all group" title="Go to Today's Plan">
-            <span className="text-xs font-semibold text-[#D1D5DB]">Plan</span>
-            <span className="w-5 h-5 rounded-full bg-[#C2F800] text-black font-extrabold text-xs flex items-center justify-center">
+        <div className="flex items-center gap-1 sm:gap-3">
+          <Link
+            href="/my-plan"
+            className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-full transition-all group"
+            title="Go to Today's Plan"
+          >
+            <span className="text-[11px] sm:text-xs font-semibold text-[#D1D5DB] group-hover:text-white">
+              Plan
+            </span>
+            <span className="w-5 h-5 rounded-full bg-[#C2F800] text-black font-extrabold text-xs flex items-center justify-center shrink-0">
               {planCount}
             </span>
-          </div>
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full transition-all group" title="Go to Saved Workouts">
-            <span className="text-xs font-semibold text-[#9CA3AF]">Saved</span>
-            <span className="w-5 h-5 rounded-full border border-gray-600 text-gray-300 font-semibold text-xs flex items-center justify-center group-hover:border-gray-400 group-hover:text-white">
+          </Link>
+          <Link
+            href="/my-plan"
+            className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-full transition-all group"
+            title="Go to Saved Workouts"
+          >
+            <span className="text-[11px] sm:text-xs font-semibold text-[#9CA3AF] group-hover:text-white">
+              Saved
+            </span>
+            <span className="w-5 h-5 rounded-full border border-gray-600 text-gray-300 font-semibold text-xs flex items-center justify-center shrink-0 group-hover:border-gray-400 group-hover:text-white">
               {savedCount}
             </span>
-          </div>
-          <div className="flex sm:hidden items-center gap-1.5">
-            <span
-              className="w-6 h-6 rounded-full bg-[#C2F800] text-black font-extrabold text-[11px] flex items-center justify-center"
-              title="Today's Plan"
-            >
-              {planCount}
-            </span>
-            <span
-              className="w-6 h-6 rounded-full border border-gray-600 text-gray-300 font-semibold text-[11px] flex items-center justify-center"
-              title="Saved Workouts"
-            >
-              {savedCount}
-            </span>
-          </div>
+          </Link>
           <button
             type="button"
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-label="Toggle navigation menu"
             aria-expanded={mobileOpen}
-            className="md:hidden flex items-center justify-center w-9 h-9 rounded-full text-[#D1D5DB] hover:text-white transition-colors"
+            className="md:hidden flex items-center justify-center w-9 h-9 rounded-full text-[#D1D5DB] hover:text-white transition-colors shrink-0"
           >
             {mobileOpen ? (
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -118,20 +115,6 @@ export const Navbar: React.FC = () => {
               My Plan
             </Link>
           </nav>
-          <div className="flex sm:hidden items-center gap-3 mt-3 pt-3 border-t border-[#1C1F26]">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full">
-              <span className="text-xs font-semibold text-[#D1D5DB]">Plan</span>
-              <span className="w-5 h-5 rounded-full bg-[#C2F800] text-black font-extrabold text-xs flex items-center justify-center">
-                {planCount}
-              </span>
-            </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full">
-              <span className="text-xs font-semibold text-[#9CA3AF]">Saved</span>
-              <span className="w-5 h-5 rounded-full border border-gray-600 text-gray-300 font-semibold text-xs flex items-center justify-center">
-                {savedCount}
-              </span>
-            </div>
-          </div>
         </div>
       )}
     </header>
