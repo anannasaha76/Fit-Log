@@ -23,15 +23,15 @@ export default function WorkoutDetailPage({
   const [workout, setWorkout] = useState<Workout | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const {addToTodayPlan,addToSaved,isWorkoutInPlan,isWorkoutSaved,todayPlan,} = useWorkout();
+  const {addToTodayPlan,addToSaved,isWorkoutInPlan,isWorkoutSaved,todayPlan,
+} = useWorkout();
 
   useEffect(() => {
     const fetchWorkoutDetail = async () => {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(
-          `https://api.abcz.workers.dev/api/fitlog/${workoutId}`
+        const res = await fetch(`https://api.api-store.workers.dev/api/fitlog/${workoutId}`
         );
         if (!res.ok) {
           if (res.status === 404) {
@@ -136,71 +136,71 @@ export default function WorkoutDetailPage({
             <h1 className="font-oswald text-3xl sm:text-5xl font-extrabold uppercase tracking-wide text-white">
               {workout.name}
             </h1>
-            <p className="text-gray-300 text-sm sm:text-base mt-3 leading-relaxed">
+            <p className="text-[#9CA3AF] text-sm sm:text-base mt-3 leading-relaxed">
               {workout.description}
             </p>
             <div className="flex flex-wrap gap-2 mt-4">
               {workout.muscleGroups?.map((group, idx) => (
                 <span
                   key={idx}
-                  className="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-[#ccff00] text-black"
+                  className="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-[#CCFF00] text-black"
                 >
                   {group}
                 </span>
               ))}
             </div>
           </div>
-          <div className="bg-[#131722] border border-[#222938] rounded-xl overflow-hidden divide-y divide-[#1c2230]">
+          <div className="bg-[#151922] border border-[#232834] rounded-xl overflow-hidden divide-y divide-[#1c2230]">
             <div className="px-5 py-3.5 flex items-center justify-between text-xs">
-              <span className="font-bold text-gray-400 tracking-wider uppercase">
+              <span className="font-bold text-[#9CA3AF] tracking-wider uppercase">
                 EQUIPMENT
               </span>
-              <span className="font-semibold text-white">
+              <span className="font-semibold text-[#E5E7EB]">
                 {workout.equipment}
               </span>
             </div>
             <div className="px-5 py-3.5 flex items-center justify-between text-xs">
-              <span className="font-bold text-gray-400 tracking-wider uppercase">
+              <span className="font-bold text-[#9CA3AF] tracking-wider uppercase">
                 DIFFICULTY
               </span>
-              <span className="font-semibold text-white">
+              <span className="font-semibold text-[#E5E7EB]">
                 {workout.difficulty}
               </span>
             </div>
             <div className="px-5 py-3.5 flex items-center justify-between text-xs">
-              <span className="font-bold text-gray-400 tracking-wider uppercase">
+              <span className="font-bold text-[#9CA3AF] tracking-wider uppercase">
                 SETS
               </span>
-              <span className="font-semibold text-white">{workout.sets}</span>
+              <span className="font-semibold text-[#E5E7EB]">{workout.sets}</span>
             </div>
             <div className="px-5 py-3.5 flex items-center justify-between text-xs">
-              <span className="font-bold text-gray-400 tracking-wider uppercase">
+              <span className="font-bold text-[#9CA3AF] tracking-wider uppercase">
                 REPS
               </span>
-              <span className="font-semibold text-white">{workout.reps}</span>
+              <span className="font-semibold text-[#E5E7EB]">{workout.reps}</span>
             </div>
             <div className="px-5 py-3.5 flex items-center justify-between text-xs">
-              <span className="font-bold text-gray-400 tracking-wider uppercase">
+              <span className="font-bold text-[#9CA3AF] tracking-wider uppercase">
                 DURATION
               </span>
-              <span className="font-semibold text-white">
+              <span className="font-semibold text-[#E5E7EB]">
                 {workout.duration} min
               </span>
             </div>
             <div className="px-5 py-3.5 flex items-center justify-between text-xs">
-              <span className="font-bold text-gray-400 tracking-wider uppercase">
+              <span className="font-bold text-[#9CA3AF] tracking-wider uppercase">
                 CALORIES
               </span>
-              <span className="font-semibold text-white">
+              <span className="font-semibold text-[#E5E7EB]">
                 {workout.caloriesBurned} kcal
               </span>
             </div>
             <div className="px-5 py-3.5 flex items-center justify-between text-xs">
-              <span className="font-bold text-gray-400 tracking-wider uppercase">
+              <span className="font-bold text-[#9CA3AF] tracking-wider uppercase">
                 RATING
               </span>
-              <span className="font-semibold text-amber-400">
-                ★ {workout.rating}
+              <span className="font-semibold text-[#E5E7EB]">
+              {workout.rating}
               </span>
             </div>
           </div>
@@ -212,9 +212,9 @@ export default function WorkoutDetailPage({
               {workout.instructions?.map((step, idx) => (
                 <li
                   key={idx}
-                  className="flex items-start gap-3.5 text-xs sm:text-sm text-gray-300 leading-normal"
+                  className="flex items-start gap-3.5 text-xs sm:text-sm text-[#D1D5DB] leading-normal"
                 >
-                  <span className="font-extrabold text-[#ccff00] shrink-0 w-5">
+                  <span className="font-extrabold text-[#D1D5DB] shrink-0 w-5">
                     {idx + 1}.
                   </span>
                   <span>{step}</span>
@@ -228,7 +228,7 @@ export default function WorkoutDetailPage({
               onClick={() => addToTodayPlan(workout)}
               disabled={isPlanFull || inPlan}
               className={`w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition-all duration-200 shadow-md ${inPlan
-                  ? "bg-[#1c2417] text-[#ccff00] border border-[#ccff00]/40 cursor-default"
+                  ? "bg-[#1c2417] text-[#CCFF00] border border-[#ccff00]/40 cursor-default"
                   : isPlanFull
                     ? "bg-[#1f2636] text-gray-500 cursor-not-allowed opacity-60"
                     : "bg-[#ccff00] hover:bg-[#b8e600] text-black shadow-[#ccff00]/20 active:scale-[0.99]"
@@ -237,7 +237,7 @@ export default function WorkoutDetailPage({
               {inPlan ? (
                 <>
                   <CheckCircle2 className="w-4 h-4 text-[#ccff00]" />
-                  <span>Added to Today&apos;s Plan</span>
+                  <span>Added to today&apos;s plan</span>
                 </>
               ) : (
                 <>
@@ -262,7 +262,7 @@ export default function WorkoutDetailPage({
               {inSaved ? (
                 <>
                   <BookmarkCheck className="w-4 h-4 text-[#ccff00]" />
-                  <span>Saved for Later</span>
+                  <span>Saved for later</span>
                 </>
               ) : (
                 <>

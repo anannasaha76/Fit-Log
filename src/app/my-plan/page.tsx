@@ -144,7 +144,7 @@ export default function MyPlanPage() {
                       </p>
                       <div className="flex items-center gap-4 text-xs text-gray-300 pt-1 font-medium">
                         <span className="flex items-center gap-1">
-                          <Clock className="w-3.5 h-3.5 text-gray-400" />
+                          <Clock className="w-3.5 h-3.5 text-[#ccff00]" />
                           {item.duration} min
                         </span>
                         <span className="flex items-center gap-1">
@@ -152,7 +152,7 @@ export default function MyPlanPage() {
                           {item.caloriesBurned} kcal
                         </span>
                         <span className="flex items-center gap-1">
-                          <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                          <Star className="w-3.5 h-3. text-[#ccff00]" />
                           {item.rating}
                         </span>
                       </div>

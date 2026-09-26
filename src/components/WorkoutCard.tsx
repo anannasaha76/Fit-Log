@@ -11,7 +11,7 @@ export const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
   return (
     <Link
       href={`/workout/${workout.id}`}
-      className="group bg-[#131722] border border-[#222938] rounded-xl overflow-hidden flex flex-col hover:border-[#ccff00]/50 hover:shadow-xl hover:shadow-[#ccff00]/5 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+      className="group bg-[#15171D] border border-[#222938] rounded-xl overflow-hidden flex flex-col hover:border-[#C2F800]/50 hover:shadow-xl hover:shadow-[#ccff00]/5 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
     >
       <div className="relative w-full h-52 bg-[#1a202c] overflow-hidden">
         <Image
@@ -28,9 +28,8 @@ export const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
         {workout.muscleGroups.map((group, idx) => (
           <span
             key={idx}
-            className="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold tracking-wider uppercase bg-[#ccff00] text-black shadow-sm"
-          >
-            {group}
+            className="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold tracking-wider uppercase bg-[#C2F800] text-black shadow-sm"
+          >{group}
           </span>
         ))}
       </div>
@@ -39,21 +38,21 @@ export const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout }) => {
           <h3 className="font-oswald text-lg font-bold uppercase tracking-wide text-white group-hover:text-[#ccff00] transition-colors line-clamp-1">
             {workout.name}
           </h3>
-          <p className="text-xs text-gray-400 mt-1 mb-4 font-medium line-clamp-1">
+          <p className="text-xs text-[#9CA3AF] mt-1 mb-4 font-medium line-clamp-1">
             {workout.equipment}
           </p>
         </div>
-        <div className="pt-3 border-t border-[#1f2636] flex items-center justify-between text-xs text-gray-300 font-medium">
+        <div className="pt-3 border-t border-[#1f2636] flex items-center gap-4 text-xs text-[#9CA3AF] font-medium">
           <div className="flex items-center gap-1.5">
-            <Clock className="w-3.5 h-3.5 text-gray-400" />
+            <Clock className="w-3.5 h-3.5 text-[#9CA3AF]" />
             <span>{workout.duration} min</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <Flame className="w-3.5 h-3.5 text-[#ccff00]" />
+            <Flame className="w-3.5 h-3.5 text-[#9CA3AF] fill-[#9CA3AF]" />
             <span>{workout.caloriesBurned} kcal</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+            <Star className="w-3.5 h-3.5 text-[#9CA3AF]" />
             <span>{workout.rating}</span>
           </div>
         </div>
