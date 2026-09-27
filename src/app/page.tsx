@@ -55,7 +55,7 @@ export default function HomePage() {
         return matchesQuery && matchesGroup;
       })
       .sort((a, b) => {
-        if (sortBy === "duration") return a.duration - b.duration;
+        if (sortBy === "duration") return b.duration - a.duration;
         if (sortBy === "caloriesBurned") return b.caloriesBurned - a.caloriesBurned;
         if (sortBy === "rating") return b.rating - a.rating;
         return 0;
