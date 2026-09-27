@@ -103,21 +103,27 @@ export const WorkoutProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const toggleDoneTodayPlan = (id: number) => {
-    setTodayPlan((prev) =>
-      prev.map((item) => {
-        if (item.id === id) {
-          const newDone = !item.isDone;
-          if (newDone) {
-            toast.success(`Great job! Completed "${item.name}".`);
-          } else {
-            toast.info(`Marked "${item.name}" as pending.`);
-          }
-          return { ...item, isDone: newDone };
-        }
-        return item;
-      })
-    );
-  };
+  const item = todayPlan.find((item) => item.id === id);
+
+  if (!item) return;
+
+  const newDone = !item.isDone;
+
+  setTodayPlan((prev) =>
+    prev.map((item) => {
+      if (item.id === id) {
+        return { ...item, isDone: newDone };
+      }
+      return item;
+    })
+  );
+
+  if (newDone) {
+    toast.success(`Great job! Completed "${item.name}".`);
+  } else {
+    toast.info(`Marked "${item.name}" as pending.`);
+  }
+};
 
   const addToSaved = (workout: Workout): boolean => {
     if (isWorkoutSaved(workout.id)) {
