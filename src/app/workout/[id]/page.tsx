@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Workout } from "@/types/workout";
 import { useWorkout } from "@/context/WorkoutContext";
+
 export default function WorkoutDetailPage({
   params,
 }: {
@@ -23,15 +24,21 @@ export default function WorkoutDetailPage({
   const [workout, setWorkout] = useState<Workout | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const {addToTodayPlan,addToSaved,isWorkoutInPlan,isWorkoutSaved,todayPlan,
-} = useWorkout();
+  const {
+    addToTodayPlan,
+    addToSaved,
+    isWorkoutInPlan,
+    isWorkoutSaved,
+    todayPlan,
+  } = useWorkout();
 
   useEffect(() => {
     const fetchWorkoutDetail = async () => {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(`https://api.api-store.workers.dev/api/fitlog/${workoutId}`
+        const res = await fetch(
+          `https://api.api-store.workers.dev/api/fitlog/${workoutId}`
         );
         if (!res.ok) {
           if (res.status === 404) {
@@ -200,7 +207,7 @@ export default function WorkoutDetailPage({
                 RATING
               </span>
               <span className="font-semibold text-[#E5E7EB]">
-              {workout.rating}
+                {workout.rating}
               </span>
             </div>
           </div>
@@ -226,13 +233,14 @@ export default function WorkoutDetailPage({
             <button
               type="button"
               onClick={() => addToTodayPlan(workout)}
-              disabled={isPlanFull || inPlan}
-              className={`w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition-all duration-200 shadow-md ${inPlan
-                  ? "bg-[#1c2417] text-[#CCFF00] border border-[#ccff00]/40 cursor-default"
+              disabled={isPlanFull}
+              className={`w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition-all duration-200 shadow-md ${
+                inPlan
+                  ? "bg-[#1c2417] text-[#CCFF00] border border-[#ccff00]/40 cursor-pointer"
                   : isPlanFull
                     ? "bg-[#1f2636] text-gray-500 cursor-not-allowed opacity-60"
                     : "bg-[#ccff00] hover:bg-[#b8e600] text-black shadow-[#ccff00]/20 active:scale-[0.99]"
-                }`}
+              }`}
             >
               {inPlan ? (
                 <>
@@ -253,11 +261,11 @@ export default function WorkoutDetailPage({
             <button
               type="button"
               onClick={() => addToSaved(workout)}
-              disabled={inSaved}
-              className={`w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 border ${inSaved
-                  ? "bg-[#1a202c] text-white border-gray-600 cursor-default"
+              className={`w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 border cursor-pointer ${
+                inSaved
+                  ? "bg-[#1a202c] text-white border-gray-600"
                   : "bg-transparent border-[#2e374a] text-gray-200 hover:border-[#ccff00]/60 hover:text-white hover:bg-[#161b26]"
-                }`}
+              }`}
             >
               {inSaved ? (
                 <>
